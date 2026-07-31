@@ -1904,3 +1904,351 @@ html {
 .light-theme .cursor-trail-dot {
   display: none;
 }
+
+/* ============================================
+   Clients Marquee
+   ============================================ */
+.clients-marquee {
+  overflow: hidden;
+  padding: var(--space-3xl) 0;
+  background: var(--n-50);
+}
+
+.clients-marquee-track {
+  display: flex;
+  gap: var(--space-4xl);
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+.client-logo {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 800;
+  color: var(--n-300);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  transition: color var(--duration-fast);
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.client-logo:hover {
+  color: var(--n-600);
+  opacity: 1;
+}
+
+/* ============================================
+   Team Section
+   ============================================ */
+.team {
+  background: var(--n-50);
+  padding: var(--space-6xl) var(--space-3xl);
+}
+
+.team-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.team-card {
+  background: var(--n-100);
+  border-radius: 16px;
+  padding: var(--space-2xl);
+  text-align: center;
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.team-card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.team-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--n-900);
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-size: 14px;
+  color: var(--n-500);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.team-social a {
+  color: var(--n-500);
+  transition: color var(--duration-fast);
+}
+
+.team-social a:hover {
+  color: var(--accent);
+}
+
+/* ============================================
+   Pricing Section
+   ============================================ */
+.pricing {
+  background: var(--n-0);
+  padding: var(--space-6xl) var(--space-3xl);
+}
+
+.pricing-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.pricing-card {
+  background: var(--n-100);
+  border-radius: 16px;
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+  position: relative;
+  border: 1px solid var(--n-300);
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-card-popular {
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.pricing-card-popular:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.pricing-popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--n-900);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pricing-card-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--n-300);
+}
+
+.pricing-card-header h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--n-900);
+  margin-bottom: var(--space-md);
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--n-900);
+  letter-spacing: -0.03em;
+}
+
+.pricing-currency {
+  font-size: 20px;
+  color: var(--n-500);
+  font-weight: 600;
+}
+
+.pricing-period {
+  font-size: 13px;
+  color: var(--n-500);
+  margin-top: var(--space-sm);
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-xl);
+  flex: 1;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  font-size: 14px;
+  color: var(--n-700);
+}
+
+.pricing-features li svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.pricing-btn {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ============================================
+   FAQ Section
+   ============================================ */
+.faq {
+  background: var(--n-50);
+  padding: var(--space-6xl) var(--space-3xl);
+}
+
+.faq-content {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.faq-list {
+  margin-top: var(--space-3xl);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--n-300);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xl) 0;
+  background: none;
+  border: none;
+  color: var(--n-900);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: none;
+  text-align: left;
+  transition: color var(--duration-fast);
+}
+
+.faq-question:hover {
+  color: var(--accent);
+}
+
+.faq-icon {
+  color: var(--n-500);
+  transition: transform var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-normal) var(--ease-out), padding var(--duration-normal);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding-bottom: var(--space-xl);
+}
+
+.faq-answer p {
+  font-size: 15px;
+  color: var(--n-600);
+  line-height: 1.6;
+}
+
+/* ============================================
+   Responsive for new sections
+   ============================================ */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-card-popular {
+    transform: none;
+  }
+
+  .pricing-card-popular:hover {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-question {
+    font-size: 16px;
+  }
+}

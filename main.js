@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnimatedStats();
     initScrollSnap();
     initAnimatedFavicon();
+    initTeam();
+    initPricing();
+    initFAQ();
+    initClientsMarquee();
   }
 
   // ============================================
@@ -995,6 +999,93 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(drawFavicon);
     }
     drawFavicon();
+  }
+
+  // ============================================
+  // Team Section
+  // ============================================
+  function initTeam() {
+    const teamEyebrow = document.querySelector('#team .eyebrow');
+    if (teamEyebrow) {
+      gsap.from(teamEyebrow.querySelectorAll('.char'), { opacity: 0, y: 20, duration: 0.6, stagger: 0.03, ease: 'power2.out', scrollTrigger: { trigger: '#team', start: 'top 75%' } });
+    }
+    const teamTitle = document.querySelector('#team .section-title');
+    if (teamTitle) {
+      gsap.from(teamTitle.querySelectorAll('.char'), { opacity: 0, y: 60, rotationX: -90, duration: 0.8, stagger: 0.02, ease: 'power3.out', scrollTrigger: { trigger: '#team .section-title', start: 'top 70%' } });
+    }
+    gsap.utils.toArray('.team-card').forEach((card, i) => {
+      gsap.from(card, { opacity: 0, y: 60, duration: 0.8, delay: i * 0.15, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%' } });
+    });
+  }
+
+  // ============================================
+  // Pricing Section
+  // ============================================
+  function initPricing() {
+    const pricingEyebrow = document.querySelector('#pricing .eyebrow');
+    if (pricingEyebrow) {
+      gsap.from(pricingEyebrow.querySelectorAll('.char'), { opacity: 0, y: 20, duration: 0.6, stagger: 0.03, ease: 'power2.out', scrollTrigger: { trigger: '#pricing', start: 'top 75%' } });
+    }
+    const pricingTitle = document.querySelector('#pricing .section-title');
+    if (pricingTitle) {
+      gsap.from(pricingTitle.querySelectorAll('.char'), { opacity: 0, y: 60, rotationX: -90, duration: 0.8, stagger: 0.02, ease: 'power3.out', scrollTrigger: { trigger: '#pricing .section-title', start: 'top 70%' } });
+    }
+    gsap.utils.toArray('.pricing-card').forEach((card, i) => {
+      gsap.from(card, { opacity: 0, y: 60, duration: 0.8, delay: i * 0.15, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%' } });
+    });
+  }
+
+  // ============================================
+  // FAQ Section
+  // ============================================
+  function initFAQ() {
+    const faqEyebrow = document.querySelector('#faq .eyebrow');
+    if (faqEyebrow) {
+      gsap.from(faqEyebrow.querySelectorAll('.char'), { opacity: 0, y: 20, duration: 0.6, stagger: 0.03, ease: 'power2.out', scrollTrigger: { trigger: '#faq', start: 'top 75%' } });
+    }
+    const faqTitle = document.querySelector('#faq .section-title');
+    if (faqTitle) {
+      gsap.from(faqTitle.querySelectorAll('.char'), { opacity: 0, y: 60, rotationX: -90, duration: 0.8, stagger: 0.02, ease: 'power3.out', scrollTrigger: { trigger: '#faq .section-title', start: 'top 70%' } });
+    }
+
+    // Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+        // Open clicked (if wasn't active)
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Stagger reveal
+    gsap.utils.toArray('.faq-item').forEach((item, i) => {
+      gsap.from(item, { opacity: 0, y: 30, duration: 0.6, delay: i * 0.1, ease: 'power2.out', scrollTrigger: { trigger: item, start: 'top 85%' } });
+    });
+  }
+
+  // ============================================
+  // Clients Marquee
+  // ============================================
+  function initClientsMarquee() {
+    const marquee = document.querySelector('.clients-marquee');
+    const track = document.querySelector('.clients-marquee-track');
+    if (!marquee || !track) return;
+
+    gsap.from(track.children, {
+      opacity: 0,
+      y: 20,
+      stagger: 0.1,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: marquee, start: 'top 80%' }
+    });
   }
 
   // Performance
