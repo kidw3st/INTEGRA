@@ -1831,4 +1831,76 @@ img {
   .portfolio-scroll-track .portfolio-card {
     width: 85vw;
   }
+
+  .hero canvas {
+    display: none;
+  }
+}
+
+/* ============================================
+   Canvas Particles
+   ============================================ */
+.hero canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   Typing Effect Cursor
+   ============================================ */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ============================================
+   Scroll Snap
+   ============================================ */
+html {
+  scroll-snap-type: y proximity;
+}
+
+.section {
+  scroll-snap-align: start;
+}
+
+/* ============================================
+   Animated Stats Bar
+   ============================================ */
+.stat {
+  position: relative;
+}
+
+/* ============================================
+   Parallax Layers
+   ============================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================
+   Light Theme Adjustments
+   ============================================ */
+.light-theme .noise-overlay {
+  opacity: 0.02;
+}
+
+.light-theme .marquee-item {
+  color: var(--n-200);
+}
+
+.light-theme .dot-grid .dot {
+  background: var(--accent);
+  opacity: 0.2;
+}
+
+.light-theme .cursor,
+.light-theme .cursor-follower {
+  display: none;
+}
+
+.light-theme .cursor-trail-dot {
+  display: none;
 }

@@ -45,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initBlurReveal();
     initSectionMorphing();
+    initCanvasParticles();
+    initTypingEffect();
+    initScrollColorShift();
+    initParallaxLayers();
+    initAnimatedStats();
+    initScrollSnap();
+    initAnimatedFavicon();
   }
 
   // ============================================
@@ -683,6 +690,311 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: { trigger: section, start: 'top 85%', end: 'top 40%', scrub: 1 }
       });
     });
+  }
+
+  // ============================================
+  // Canvas Particles (lightweight, no Three.js)
+  // ============================================
+  function initCanvasParticles() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:0;z-index:0;pointer-events:none;';
+    hero.insertBefore(canvas, hero.firstChild);
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouseX = 0, mouseY = 0;
+    let animId;
+
+    function resize() {
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          this.x -= dx * 0.01;
+          this.y -= dy * 0.01;
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 113, 227, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 113, 227, ${0.1 * (1 - dist / 100)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animId = requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Stop when out of view
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'top bottom',
+      end: 'bottom top',
+      onLeave: () => cancelAnimationFrame(animId),
+      onEnterBack: () => animate()
+    });
+  }
+
+  // ============================================
+  // Typing Effect
+  // ============================================
+  function initTypingEffect() {
+    const subtitle = document.getElementById('heroSubtitle');
+    if (!subtitle) return;
+
+    const text = subtitle.textContent;
+    subtitle.textContent = '';
+    subtitle.style.opacity = '1';
+    subtitle.style.transform = 'none';
+
+    let i = 0;
+    const cursor = document.createElement('span');
+    cursor.style.cssText = 'display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom;';
+    subtitle.appendChild(cursor);
+
+    // Add blink keyframes
+    const style = document.createElement('style');
+    style.textContent = '@keyframes blink{50%{opacity:0}}';
+    document.head.appendChild(style);
+
+    function type() {
+      if (i < text.length) {
+        subtitle.insertBefore(document.createTextNode(text[i]), cursor);
+        i++;
+        setTimeout(type, 50 + Math.random() * 50);
+      } else {
+        // Remove cursor after typing
+        setTimeout(() => { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.5s'; }, 2000);
+      }
+    }
+
+    // Start after hero title animation
+    setTimeout(type, 1500);
+  }
+
+  // ============================================
+  // Scroll Color Shift
+  // ============================================
+  function initScrollColorShift() {
+    const sections = document.querySelectorAll('.section');
+    const colors = [
+      { bg: '#000000', text: '#FFFFFF' },
+      { bg: '#0A0A0A', text: '#FFFFFF' },
+      { bg: '#000000', text: '#FFFFFF' },
+      { bg: '#0A0A0A', text: '#FFFFFF' },
+      { bg: '#000000', text: '#FFFFFF' },
+      { bg: '#0A0A0A', text: '#FFFFFF' },
+      { bg: '#000000', text: '#FFFFFF' }
+    ];
+
+    sections.forEach((section, i) => {
+      if (!colors[i]) return;
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => {
+          gsap.to('body', { backgroundColor: colors[i].bg, duration: 0.8, ease: 'power2.inOut' });
+        },
+        onEnterBack: () => {
+          gsap.to('body', { backgroundColor: colors[i].bg, duration: 0.8, ease: 'power2.inOut' });
+        }
+      });
+    });
+  }
+
+  // ============================================
+  // Parallax Layers
+  // ============================================
+  function initParallaxLayers() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+
+    // Add floating shapes
+    for (let i = 0; i < 5; i++) {
+      const shape = document.createElement('div');
+      const size = Math.random() * 200 + 50;
+      shape.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        border: 1px solid rgba(0, 113, 227, ${Math.random() * 0.1 + 0.02});
+        border-radius: ${Math.random() > 0.5 ? '50%' : '12px'};
+        top: ${Math.random() * 100}%;
+        left: ${Math.random() * 100}%;
+        pointer-events: none;
+        z-index: 0;
+      `;
+      hero.appendChild(shape);
+
+      gsap.to(shape, {
+        y: -100 - Math.random() * 200,
+        rotation: Math.random() * 360,
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1 + Math.random()
+        }
+      });
+    }
+  }
+
+  // ============================================
+  // Animated Stats (visual bars)
+  // ============================================
+  function initAnimatedStats() {
+    const stats = document.querySelectorAll('.stat');
+    stats.forEach(stat => {
+      const target = parseInt(stat.dataset.target);
+      if (isNaN(target)) return;
+
+      // Add visual bar
+      const bar = document.createElement('div');
+      bar.style.cssText = `
+        width: 100%;
+        height: 4px;
+        background: var(--n-300);
+        border-radius: 2px;
+        margin-top: 12px;
+        overflow: hidden;
+      `;
+      const fill = document.createElement('div');
+      fill.style.cssText = `
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), #5AC8FA);
+        border-radius: 2px;
+        transition: width 2s cubic-bezier(0.16, 1, 0.3, 1);
+      `;
+      bar.appendChild(fill);
+      stat.appendChild(bar);
+
+      ScrollTrigger.create({
+        trigger: stat,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          const percent = Math.min(target / 150 * 100, 100);
+          fill.style.width = percent + '%';
+        }
+      });
+    });
+  }
+
+  // ============================================
+  // Scroll Snap
+  // ============================================
+  function initScrollSnap() {
+    // Only on desktop, and only for main sections
+    if (window.innerWidth < 768) return;
+
+    // Light scroll snap via CSS
+    document.documentElement.style.scrollSnapType = 'y proximity';
+
+    document.querySelectorAll('.section').forEach(section => {
+      section.style.scrollSnapAlign = 'start';
+    });
+  }
+
+  // ============================================
+  // Animated Favicon
+  // ============================================
+  function initAnimatedFavicon() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d');
+
+    let frame = 0;
+    function drawFavicon() {
+      ctx.clearRect(0, 0, 32, 32);
+
+      // Background
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, 32, 32);
+
+      // Animated "I"
+      const offset = Math.sin(frame * 0.05) * 2;
+      ctx.fillStyle = '#0071E3';
+      ctx.font = 'bold 22px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('I', 16, 16 + offset);
+
+      // Update favicon
+      const link = document.querySelector('link[rel="icon"]') || document.createElement('link');
+      link.rel = 'icon';
+      link.href = canvas.toDataURL();
+      if (!document.querySelector('link[rel="icon"]')) {
+        document.head.appendChild(link);
+      }
+
+      frame++;
+      requestAnimationFrame(drawFavicon);
+    }
+    drawFavicon();
   }
 
   // Performance
