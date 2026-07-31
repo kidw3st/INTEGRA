@@ -181,12 +181,13 @@
       <path class="circuit-path" id="circuitPath"
         d="M 50 100 L 200 100 Q 220 100 220 120 L 220 200 Q 220 220 240 220 L 400 220 Q 420 220 420 240 L 420 350 Q 420 370 440 370 L 600 370 Q 620 370 620 390 L 620 480 Q 620 500 640 500 L 750 500"
         stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"
-        filter="url(#glow)" opacity="0"/>
-      <!-- Morphing shape (circle → rounded rect → hexagon) -->
-      <path class="morph-shape" id="morphShape" fill="#0071E3" opacity="0"
-        d="M 400 300 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0"/>
+        filter="url(#glow)"/>
+      <!-- Morphing shape -->
+      <g id="morphGroup">
+        <rect class="morph-shape" id="morphShape" x="385" y="285" width="30" height="30" rx="4" fill="#0071E3"/>
+      </g>
       <!-- Traveling dot -->
-      <circle class="travel-dot" id="travelDot" r="6" fill="#0071E3" opacity="0" filter="url(#glow)"/>
+      <circle class="travel-dot" id="travelDot" r="6" fill="#0071E3" filter="url(#glow)"/>
     </svg>
 
     <div class="process-content">

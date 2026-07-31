@@ -438,34 +438,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const morphShape = document.getElementById('morphShape');
 
   if (circuitPath && travelDot && morphShape) {
+    // Get path length for draw effect
     const pathLength = circuitPath.getTotalLength();
 
     // Set initial stroke-dasharray for draw effect
-    circuitPath.style.strokeDasharray = pathLength;
-    circuitPath.style.strokeDashoffset = pathLength;
+    gsap.set(circuitPath, {
+      strokeDasharray: pathLength,
+      strokeDashoffset: pathLength,
+      opacity: 0.8
+    });
 
+    gsap.set(travelDot, { opacity: 0 });
+    gsap.set(morphShape, { opacity: 0 });
+
+    // Build timeline that auto-plays on scroll into view
     const circuitTl = gsap.timeline({
       scrollTrigger: {
         trigger: '#process',
-        start: 'top 60%',
-        end: 'bottom 40%',
-        scrub: 1
+        start: 'top 65%',
+        toggleActions: 'play none none none'
       }
     });
 
-    // 1. Draw the circuit path (like createDrawable '0 1')
+    // 1. Draw the circuit path
     circuitTl.to(circuitPath, {
       strokeDashoffset: 0,
-      opacity: 1,
-      duration: 3,
-      ease: 'none'
+      duration: 2.5,
+      ease: 'power1.inOut'
     });
 
-    // 2. Travel dot along the path (like createMotionPath)
+    // 2. Show and animate travel dot along the path
     circuitTl.to(travelDot, {
       opacity: 1,
-      duration: 0.3
-    }, 0.3);
+      duration: 0.2
+    }, 0.5);
 
     circuitTl.to(travelDot, {
       motionPath: {
@@ -475,42 +481,48 @@ document.addEventListener('DOMContentLoaded', () => {
         alignOrigin: [0.5, 0.5]
       },
       duration: 2.5,
-      ease: 'none'
-    }, 0.3);
-
-    // 3. Morphing shape (circle → rounded rect → hexagon)
-    // Circle
-    const circlePath = 'M 400 300 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0';
-    // Rounded rectangle
-    const rectPath = 'M 380 285 Q 380 275 390 275 L 410 275 Q 420 275 420 285 L 420 315 Q 420 325 410 325 L 390 325 Q 380 325 380 315 Z';
-    // Hexagon
-    const hexPath = 'M 400 275 L 420 287 L 420 313 L 400 325 L 380 313 L 380 287 Z';
-
-    circuitTl.to(morphShape, {
-      opacity: 0.8,
-      duration: 0.5
+      ease: 'power1.inOut'
     }, 0.5);
 
-    // Circle → Rect
+    // 3. Morphing shape — scale/rotate transforms (works without MorphSVG plugin)
+    // Show shape
     circuitTl.to(morphShape, {
-      attr: { d: rectPath },
-      duration: 0.8,
-      ease: 'power2.inOut'
-    }, 1);
+      opacity: 0.6,
+      duration: 0.4
+    }, 0.8);
 
-    // Rect → Hex
+    // Scale pulse: small → big
     circuitTl.to(morphShape, {
-      attr: { d: hexPath },
-      duration: 0.8,
+      scale: 1.5,
+      transformOrigin: '50% 50%',
+      duration: 0.6,
+      ease: 'power2.inOut'
+    }, 1.2);
+
+    // Rotate
+    circuitTl.to(morphShape, {
+      rotation: 90,
+      transformOrigin: '50% 50%',
+      duration: 0.5,
       ease: 'power2.inOut'
     }, 1.8);
 
-    // Hex → back to Circle
+    // Scale back + rotate more
     circuitTl.to(morphShape, {
-      attr: { d: circlePath },
-      duration: 0.8,
+      scale: 0.8,
+      rotation: 180,
+      duration: 0.5,
       ease: 'power2.inOut'
-    }, 2.6);
+    }, 2.3);
+
+    // Final scale
+    circuitTl.to(morphShape, {
+      scale: 1,
+      rotation: 360,
+      opacity: 0.8,
+      duration: 0.4,
+      ease: 'power2.out'
+    }, 2.8);
   }
 
   // Timeline line animation
