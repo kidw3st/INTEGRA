@@ -44,6 +44,23 @@
   --duration-slow: 800ms;
 }
 
+.light-theme {
+  --n-0: #FFFFFF;
+  --n-50: #F5F5F7;
+  --n-100: #E8E8ED;
+  --n-200: #D2D2D7;
+  --n-300: #B0B0B6;
+  --n-400: #86868B;
+  --n-500: #6E6E73;
+  --n-600: #515154;
+  --n-700: #333336;
+  --n-800: #1D1D1F;
+  --n-900: #000000;
+  --accent: #0066CC;
+  --accent-hover: #0077ED;
+  --accent-glow: rgba(0, 102, 204, 0.2);
+}
+
 /* ============================================
    Reset & Base
    ============================================ */
@@ -1503,5 +1520,315 @@ img {
 
   .stat-number {
     font-size: 48px;
+  }
+}
+
+/* ============================================
+   Hamburger Menu
+   ============================================ */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: none;
+  gap: 6px;
+  z-index: 1002;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--n-900);
+  border-radius: 2px;
+  transition: all var(--duration-fast) var(--ease-out);
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ============================================
+   Mobile Menu
+   ============================================ */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.mobile-menu-links a {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--n-900);
+  letter-spacing: -0.02em;
+  transition: color var(--duration-fast);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mobile-menu.active .mobile-menu-links a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu-links a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu-links a:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu-links a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu-links a:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu-links a:nth-child(5) { transition-delay: 0.3s; }
+
+.mobile-menu-links a:hover { color: var(--accent); }
+
+/* ============================================
+   Theme Toggle
+   ============================================ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--n-300);
+  border-radius: 8px;
+  color: var(--n-700);
+  cursor: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  border-color: var(--n-500);
+  color: var(--n-900);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.theme-icon-moon { display: none; }
+.light-theme .theme-icon-sun { display: none; }
+.light-theme .theme-icon-moon { display: block; }
+
+/* ============================================
+   Animated Gradient Mesh
+   ============================================ */
+.hero-mesh-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0, 113, 227, 0.08), transparent),
+    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(90, 200, 250, 0.06), transparent),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(0, 50, 120, 0.05), transparent);
+  animation: meshFloat 12s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes meshFloat {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.03) rotate(0.5deg); }
+  100% { transform: scale(1.05) rotate(1deg); }
+}
+
+/* ============================================
+   Scroll Blur Reveal
+   ============================================ */
+[data-blur-reveal] {
+  filter: blur(8px);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: filter 0.8s var(--ease-out), opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+[data-blur-reveal].revealed {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Marquee
+   ============================================ */
+.marquee {
+  overflow: hidden;
+  padding: var(--space-2xl) 0;
+  background: var(--n-0);
+  border-top: 1px solid var(--n-200);
+  border-bottom: 1px solid var(--n-200);
+  position: relative;
+}
+
+.marquee::before,
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before { left: 0; background: linear-gradient(to right, var(--n-0), transparent); }
+.marquee::after { right: 0; background: linear-gradient(to left, var(--n-0), transparent); }
+
+.marquee-track {
+  display: flex;
+  gap: var(--space-3xl);
+  animation: marqueeScroll 20s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 800;
+  color: var(--n-300);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  transition: color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.marquee-item:hover { color: var(--n-700); }
+.marquee-dot { color: var(--accent); font-size: 0.5em; vertical-align: middle; }
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================
+   Horizontal Scroll Portfolio
+   ============================================ */
+.portfolio-scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.portfolio-scroll-track {
+  display: flex;
+  gap: var(--space-xl);
+  padding: 0 var(--space-3xl);
+  width: max-content;
+}
+
+.portfolio-scroll-track .portfolio-card {
+  flex-shrink: 0;
+  width: 500px;
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================
+   Glow Cards
+   ============================================ */
+.glow-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: radial-gradient(600px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(0, 113, 227, 0.4), transparent 40%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast);
+  z-index: 3;
+}
+
+.glow-card:hover::after { opacity: 1; }
+
+/* ============================================
+   Service Icons
+   ============================================ */
+.service-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--n-500);
+  transition: color var(--duration-fast), transform var(--duration-fast);
+}
+
+.service-item:hover .service-icon {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   Cursor Trail
+   ============================================ */
+.cursor-trail-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9996;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+/* ============================================
+   Magnetic Wrap
+   ============================================ */
+.magnetic-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+/* ============================================
+   Responsive Additions
+   ============================================ */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links { display: none; }
+  .theme-toggle { border: none; width: 32px; height: 32px; }
+
+  .portfolio-scroll-track .portfolio-card {
+    width: 85vw;
   }
 }
