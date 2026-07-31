@@ -9,6 +9,41 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ============================================
+  // Dot Grid Animation (anime.js)
+  // ============================================
+  const dotGrid = document.getElementById('dotGrid');
+  if (dotGrid) {
+    const GRID_SIZE = 13;
+    const TOTAL = GRID_SIZE * GRID_SIZE;
+
+    // Generate dots
+    for (let i = 0; i < TOTAL; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      dotGrid.appendChild(dot);
+    }
+
+    // Animate dots from center
+    const dots = dotGrid.querySelectorAll('.dot');
+    anime({
+      targets: dots,
+      scale: [
+        { value: 1.2, duration: 600, easing: 'inOutQuad' },
+        { value: 0.75, duration: 600, easing: 'inOutQuad' }
+      ],
+      opacity: [
+        { value: 0.7, duration: 400 },
+        { value: 0.35, duration: 400 }
+      ],
+      delay: anime.stagger(30, {
+        grid: [GRID_SIZE, GRID_SIZE],
+        from: 'center'
+      }),
+      loop: false
+    });
+  }
+
+  // ============================================
   // Custom Cursor
   // ============================================
   const cursor = document.getElementById('cursor');
@@ -88,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       duration: 1.5,
       ease: 'power2.out'
     })
-    .to('.hero-grid-layer', {
+    .to('.dot-grid', {
       opacity: 1,
       duration: 1.5,
       ease: 'power2.out'
@@ -121,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  gsap.to('#heroGrid', {
+  gsap.to('#dotGrid', {
     y: -60,
     scrollTrigger: {
       trigger: '#hero',
