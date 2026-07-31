@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио — INTEGRA</title>
+  <meta name="description" content="Наши проекты: лендинги, корпоративные сайты, веб-приложения и интернет-магазины.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><text x='16' y='22' text-anchor='middle' fill='%230071E3' font-family='Inter,sans-serif' font-weight='900' font-size='20'>I</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { min-height: 50vh; padding: 160px 48px 80px; background: var(--n-0); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.08), transparent); pointer-events: none; }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 900; color: var(--n-900); letter-spacing: -0.04em; line-height: 1; margin-bottom: 16px; }
+    .page-hero-subtitle { font-size: 18px; color: var(--n-500); max-width: 600px; }
+    .portfolio-full { padding: 80px 48px; background: var(--n-0); }
+    .portfolio-full-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto; }
+    .portfolio-full-card { background: var(--n-100); border-radius: 16px; overflow: hidden; transition: transform 0.4s var(--ease-out), box-shadow 0.4s; cursor: none; }
+    .portfolio-full-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .portfolio-full-card-img { aspect-ratio: 16/10; overflow: hidden; }
+    .portfolio-full-card-img div { width: 100%; height: 100%; transition: transform 0.6s var(--ease-out); }
+    .portfolio-full-card:hover .portfolio-full-card-img div { transform: scale(1.05); }
+    .portfolio-full-card-info { padding: 24px; }
+    .portfolio-full-card-info h3 { font-size: 20px; font-weight: 600; color: var(--n-900); margin-bottom: 8px; }
+    .portfolio-full-card-info p { font-size: 14px; color: var(--n-500); line-height: 1.5; margin-bottom: 16px; }
+    .portfolio-full-card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .portfolio-full-card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--accent); margin-top: 16px; transition: gap 0.3s; }
+    .portfolio-full-card-link:hover { gap: 12px; }
+    .portfolio-filters { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+    .portfolio-filter { padding: 8px 20px; background: var(--n-100); border: 1px solid var(--n-300); border-radius: 8px; color: var(--n-600); font-size: 14px; font-weight: 500; cursor: none; transition: all 0.2s; }
+    .portfolio-filter:hover, .portfolio-filter.active { background: var(--accent); color: var(--n-900); border-color: var(--accent); }
+    @media (max-width: 1024px) { .portfolio-full-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .portfolio-full-grid { grid-template-columns: 1fr; } .page-hero { padding: 120px 24px 60px; } .portfolio-full { padding: 60px 24px; } }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <nav class="nav visible" id="nav">
+    <a href="index.html" class="nav-logo">INTEGRA</a>
+    <div class="nav-links">
+      <a href="index.html#about">О нас</a>
+      <a href="portfolio.html" class="active">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="contact.html" class="nav-cta">Заказать</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-links">
+      <a href="index.html">Главная</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="about.html">О нас</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <h1 class="page-hero-title">Портфолио</h1>
+    <p class="page-hero-subtitle">Каждый проект — это результат анализа, проектирования и точной реализации.</p>
+  </section>
+
+  <section class="portfolio-full">
+    <div class="portfolio-filters">
+      <button class="portfolio-filter active">Все</button>
+      <button class="portfolio-filter">Лендинги</button>
+      <button class="portfolio-filter">Корпоративные</button>
+      <button class="portfolio-filter">Интернет-магазины</button>
+      <button class="portfolio-filter">Веб-приложения</button>
+    </div>
+    <div class="portfolio-full-grid">
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>ShopFlow</h3>
+          <p>Интернет-магазин с кастомной CMS и интеграцией с 1С. Более 10 000 товаров, умная фильтрация, быстрый checkout.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">E-commerce</span><span class="tag">CMS</span><span class="tag">1С</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #0f3460, #533483);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>FinTech Group</h3>
+          <p>Корпоративный сайт финансовой компании с анимациями и интерактивными графиками.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">Corporate</span><span class="tag">Finance</span><span class="tag">Animation</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #1b1b2f, #162447);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>CloudDesk</h3>
+          <p>Веб-приложение для управления удалёнными командами с real-time обновлениями.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">WebSocket</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #1a1a2e, #0f3460);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>АрхСтрой</h3>
+          <p>Лендинг для архитектурной студии с 3D-визуализацией и панорамными турами.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">Landing</span><span class="tag">3D</span><span class="tag">WebGL</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #2d1b4e, #1a1a2e);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>MedTech Pro</h3>
+          <p>Платформа онлайн-консультаций с врачами. Видеозвонки, чат, электронные рецепты.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">Healthcare</span><span class="tag">WebRTC</span><span class="tag">HIPAA</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a href="#" class="portfolio-full-card">
+        <div class="portfolio-full-card-img"><div style="background: linear-gradient(135deg, #0a2a1a, #1a3a2a);"></div></div>
+        <div class="portfolio-full-card-info">
+          <h3>EcoMarket</h3>
+          <p>Маркетплейс экологичных товаров с системой рейтингов и отзывов.</p>
+          <div class="portfolio-full-card-tags"><span class="tag">Marketplace</span><span class="tag">E-commerce</span><span class="tag">Green</span></div>
+          <span class="portfolio-full-card-link">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="footer-logo">INTEGRA</span>
+      <span class="footer-copy">&copy; 2026 INTEGRA. Все права защищены.</span>
+      <a href="#" class="footer-back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Наверх <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

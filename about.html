@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О нас — INTEGRA</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><text x='16' y='22' text-anchor='middle' fill='%230071E3' font-family='Inter,sans-serif' font-weight='900' font-size='20'>I</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { min-height: 50vh; padding: 160px 48px 80px; background: var(--n-0); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.08), transparent); pointer-events: none; }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 900; color: var(--n-900); letter-spacing: -0.04em; line-height: 1; margin-bottom: 16px; }
+    .page-hero-subtitle { font-size: 18px; color: var(--n-500); max-width: 600px; }
+    .about-full { padding: 80px 48px; background: var(--n-0); }
+    .about-full-content { max-width: 1000px; margin: 0 auto; }
+    .about-full h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--n-900); margin-bottom: 24px; }
+    .about-full p { font-size: 18px; color: var(--n-600); line-height: 1.7; margin-bottom: 48px; }
+    .about-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 80px; }
+    .about-value { background: var(--n-100); border-radius: 16px; padding: 32px; }
+    .about-value h3 { font-size: 20px; font-weight: 600; color: var(--n-900); margin-bottom: 12px; }
+    .about-value p { font-size: 15px; color: var(--n-500); line-height: 1.6; }
+    .about-timeline { position: relative; padding-left: 40px; }
+    .about-timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: var(--n-300); }
+    .about-timeline-item { position: relative; margin-bottom: 48px; }
+    .about-timeline-item::before { content: ''; position: absolute; left: -33px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--n-0); }
+    .about-timeline-year { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+    .about-timeline-item h3 { font-size: 20px; font-weight: 600; color: var(--n-900); margin-bottom: 8px; }
+    .about-timeline-item p { font-size: 15px; color: var(--n-500); line-height: 1.6; }
+    @media (max-width: 1024px) { .about-values { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .page-hero { padding: 120px 24px 60px; } .about-full { padding: 60px 24px; } }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <nav class="nav visible" id="nav">
+    <a href="index.html" class="nav-logo">INTEGRA</a>
+    <div class="nav-links">
+      <a href="about.html" class="active">О нас</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="contact.html" class="nav-cta">Заказать</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-links">
+      <a href="index.html">Главная</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="about.html">О нас</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <h1 class="page-hero-title">О нас</h1>
+    <p class="page-hero-subtitle">Мы — команда, которая превращает идеи в цифровые продукты.</p>
+  </section>
+
+  <section class="about-full">
+    <div class="about-full-content">
+      <h2>Наша миссия</h2>
+      <p>INTEGRA — это не просто веб-студия. Мы создаём цифровые инструменты, которые помогают бизнесу расти. Каждый проект начинается с глубокого понимания задач клиента и заканчивается продуктом, который приносит реальные результаты.</p>
+
+      <div class="about-values">
+        <div class="about-value">
+          <h3>Качество</h3>
+          <p>Мы не гонимся за количеством. Каждый проект получает полное внимание команды и детальную проработку.</p>
+        </div>
+        <div class="about-value">
+          <h3>Прозрачность</h3>
+          <p>Открытая коммуникация на каждом этапе. Вы всегда знаете, на что тратится бюджет и время.</p>
+        </div>
+        <div class="about-value">
+          <h3>Инновации</h3>
+          <p>Используем современные технологии и подходы, чтобы ваш продукт выделялся на рынке.</p>
+        </div>
+      </div>
+
+      <h2>Наша история</h2>
+      <div class="about-timeline">
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2019</div>
+          <h3>Основание</h3>
+          <p>Три разработчика объединились, чтобы создать студию, которая делает сайты по-другому — с фокусом на результат.</p>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2020</div>
+          <h3>Первые крупные клиенты</h3>
+          <p>Запустили 50+ проектов и получили первых клиентов из enterprise-сегмента.</p>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2022</div>
+          <h3>Расширение команды</h3>
+          <p>Выросли до 12 человек и добавили направление UI/UX дизайна.</p>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2024</div>
+          <h3>150+ проектов</h3>
+          <p>Преодолели отметку в 150 запущенных проектов. 98% клиентов возвращаются к нам снова.</p>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2026</div>
+          <h3>Сегодня</h3>
+          <p>Продолжаем расти и создавать продукты, которые меняют бизнес наших клиентов к лучшему.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="footer-logo">INTEGRA</span>
+      <span class="footer-copy">&copy; 2026 INTEGRA. Все права защищены.</span>
+      <a href="#" class="footer-back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Наверх <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

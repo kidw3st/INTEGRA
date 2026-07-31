@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты — INTEGRA</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><text x='16' y='22' text-anchor='middle' fill='%230071E3' font-family='Inter,sans-serif' font-weight='900' font-size='20'>I</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { min-height: 50vh; padding: 160px 48px 80px; background: var(--n-0); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.08), transparent); pointer-events: none; }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 900; color: var(--n-900); letter-spacing: -0.04em; line-height: 1; margin-bottom: 16px; }
+    .page-hero-subtitle { font-size: 18px; color: var(--n-500); max-width: 600px; }
+    .contact-full { padding: 80px 48px; background: var(--n-0); }
+    .contact-full-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; }
+    .contact-full-info h2 { font-size: 32px; font-weight: 700; color: var(--n-900); margin-bottom: 24px; }
+    .contact-full-info p { font-size: 16px; color: var(--n-500); line-height: 1.6; margin-bottom: 48px; }
+    .contact-full-methods { display: flex; flex-direction: column; gap: 24px; }
+    .contact-method { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--n-100); border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; }
+    .contact-method:hover { transform: translateX(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .contact-method-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), #5AC8FA); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+    .contact-method-info h4 { font-size: 16px; font-weight: 600; color: var(--n-900); margin-bottom: 4px; }
+    .contact-method-info p { font-size: 14px; color: var(--n-500); margin-bottom: 0; }
+    .contact-full-form { background: var(--n-100); border-radius: 16px; padding: 48px; }
+    .contact-full-form h3 { font-size: 24px; font-weight: 700; color: var(--n-900); margin-bottom: 32px; }
+    @media (max-width: 1024px) { .contact-full-grid { grid-template-columns: 1fr; gap: 48px; } }
+    @media (max-width: 768px) { .page-hero { padding: 120px 24px 60px; } .contact-full { padding: 60px 24px; } .contact-full-form { padding: 32px; } }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <nav class="nav visible" id="nav">
+    <a href="index.html" class="nav-logo">INTEGRA</a>
+    <div class="nav-links">
+      <a href="index.html#about">О нас</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="contact.html" class="nav-cta active">Заказать</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-links">
+      <a href="index.html">Главная</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="about.html">О нас</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <h1 class="page-hero-title">Контакты</h1>
+    <p class="page-hero-subtitle">Расскажите о вашем проекте — мы ответим в течение 24 часов.</p>
+  </section>
+
+  <section class="contact-full">
+    <div class="contact-full-grid">
+      <div class="contact-full-info">
+        <h2>Свяжитесь с нами</h2>
+        <p>Мы всегда открыты для новых проектов и сотрудничества. Выберите удобный способ связи или заполните форму.</p>
+        <div class="contact-full-methods">
+          <a href="https://t.me/" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21.198 2.433a2.242 2.242 0 00-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 01-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855.053 1.669.553 1.953.707.4 1.631.574 2.333.752l4.154 1.383c.246.756 1.02 3.284 1.194 3.858.103.338.23.725.448 1.012.135.18.313.31.526.374a.898.898 0 00.582-.073l2.346-1.563 3.474 2.674c.147.113.325.174.504.174a.77.77 0 00.546-.227.766.766 0 00.228-.544l.034-4.248 3.708-3.058c.37-.305.592-.754.592-1.236V3.67c0-.482-.222-.93-.592-1.236a1.754 1.754 0 00-1.106-.416c-.15 0-.298.02-.44.058l-.002.001z" fill="currentColor"/></svg></div>
+            <div class="contact-method-info"><h4>Telegram</h4><p>Быстрый ответ в течение часа</p></div>
+          </a>
+          <a href="https://wa.me/" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div class="contact-method-info"><h4>WhatsApp</h4><p>Удобно для обсуждения деталей</p></div>
+          </a>
+          <a href="mailto:hello@integra.dev" class="contact-method">
+            <div class="contact-method-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M22 4L12 13L2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="contact-method-info"><h4>Email</h4><p>hello@integra.dev</p></div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-full-form">
+        <h3>Оставьте заявку</h3>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+            <label class="form-group-label" for="name">Имя</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <label class="form-group-label" for="email">Email</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="phone" name="phone" placeholder="Телефон">
+            <label class="form-group-label" for="phone">Телефон</label>
+          </div>
+          <div class="form-group">
+            <select id="service" name="service" style="width:100%;padding:16px 20px;background:var(--n-100);border:1px solid var(--n-300);border-radius:12px;color:var(--n-900);font-family:var(--font-body);font-size:16px;outline:none;cursor:none;">
+              <option value="">Выберите услугу</option>
+              <option value="landing">Лендинг</option>
+              <option value="corporate">Корпоративный сайт</option>
+              <option value="ecommerce">Интернет-магазин</option>
+              <option value="webapp">Веб-приложение</option>
+              <option value="design">UI/UX Дизайн</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Расскажите о проекте" rows="4" required></textarea>
+            <label class="form-group-label" for="message">Сообщение</label>
+          </div>
+          <button type="submit" class="btn-submit">
+            <span>Отправить заявку</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="footer-logo">INTEGRA</span>
+      <span class="footer-copy">&copy; 2026 INTEGRA. Все права защищены.</span>
+      <a href="#" class="footer-back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Наверх <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

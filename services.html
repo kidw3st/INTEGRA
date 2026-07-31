@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Услуги — INTEGRA</title>
+  <meta name="description" content="Разработка сайтов, веб-приложений, UI/UX дизайн, интеграции и поддержка.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><text x='16' y='22' text-anchor='middle' fill='%230071E3' font-family='Inter,sans-serif' font-weight='900' font-size='20'>I</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { min-height: 50vh; padding: 160px 48px 80px; background: var(--n-0); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.08), transparent); pointer-events: none; }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 900; color: var(--n-900); letter-spacing: -0.04em; line-height: 1; margin-bottom: 16px; }
+    .page-hero-subtitle { font-size: 18px; color: var(--n-500); max-width: 600px; }
+    .services-detail { padding: 80px 48px; background: var(--n-0); }
+    .services-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; max-width: 1200px; margin: 0 auto; }
+    .service-detail-card { background: var(--n-100); border-radius: 16px; padding: 48px; transition: transform 0.4s var(--ease-out), box-shadow 0.4s; }
+    .service-detail-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .service-detail-icon { width: 64px; height: 64px; background: linear-gradient(135deg, var(--accent), #5AC8FA); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: white; }
+    .service-detail-card h3 { font-size: 28px; font-weight: 700; color: var(--n-900); margin-bottom: 16px; }
+    .service-detail-card p { font-size: 16px; color: var(--n-500); line-height: 1.6; margin-bottom: 24px; }
+    .service-detail-features { list-style: none; padding: 0; }
+    .service-detail-features li { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 15px; color: var(--n-700); }
+    .service-detail-features li svg { color: var(--accent); flex-shrink: 0; }
+    .service-detail-price { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--n-300); }
+    .service-detail-price span { font-size: 14px; color: var(--n-500); }
+    .service-detail-price strong { font-size: 24px; font-weight: 700; color: var(--n-900); }
+    @media (max-width: 1024px) { .services-detail-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .page-hero { padding: 120px 24px 60px; } .services-detail { padding: 60px 24px; } .service-detail-card { padding: 32px; } }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <nav class="nav visible" id="nav">
+    <a href="index.html" class="nav-logo">INTEGRA</a>
+    <div class="nav-links">
+      <a href="index.html#about">О нас</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html" class="active">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="contact.html" class="nav-cta">Заказать</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-links">
+      <a href="index.html">Главная</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="services.html">Услуги</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="about.html">О нас</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <h1 class="page-hero-title">Услуги</h1>
+    <p class="page-hero-subtitle">Полный цикл разработки — от идеи до запуска и поддержки.</p>
+  </section>
+
+  <section class="services-detail">
+    <div class="services-detail-grid">
+      <div class="service-detail-card">
+        <div class="service-detail-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Разработка сайтов</h3>
+        <p>Создаём лендинги, корпоративные сайты и интернет-магазины. Адаптивная вёрстка, SEO-оптимизация, высокая скорость загрузки.</p>
+        <ul class="service-detail-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Адаптивный дизайн под все устройства</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SEO-оптимизация из коробки</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Интеграция с CMS</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Анимации и интерактивность</li>
+        </ul>
+        <div class="service-detail-price"><span>от</span> <strong>150 000 ₽</strong></div>
+      </div>
+      <div class="service-detail-card">
+        <div class="service-detail-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Веб-приложения</h3>
+        <p>Разрабатываем SaaS-решения, CRM, ERP-системы и дашборды. Полный цикл от проектирования до продакшена.</p>
+        <ul class="service-detail-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Кастомная архитектура</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Real-time обновления</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Масштабируемая инфраструктура</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>API-интеграции</li>
+        </ul>
+        <div class="service-detail-price"><span>от</span> <strong>350 000 ₽</strong></div>
+      </div>
+      <div class="service-detail-card">
+        <div class="service-detail-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <h3>UI/UX Дизайн</h3>
+        <p>Проектируем интерфейсы, которые решают бизнес-задачи. Прототипирование, тестирование, дизайн-системы.</p>
+        <ul class="service-detail-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Исследование пользователей</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Интерактивные прототипы</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Дизайн-система</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>A/B тестирование</li>
+        </ul>
+        <div class="service-detail-price"><span>от</span> <strong>100 000 ₽</strong></div>
+      </div>
+      <div class="service-detail-card">
+        <div class="service-detail-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M4 12V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 6L12 2L8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Интеграции</h3>
+        <p>Подключаем CRM, платёжные системы, аналитику и внешние сервисы. Автоматизация бизнес-процессов.</p>
+        <ul class="service-detail-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM и ERP системы</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Платёжные системы</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Аналитика и метрики</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Мессенджеры и уведомления</li>
+        </ul>
+        <div class="service-detail-price"><span>от</span> <strong>50 000 ₽</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="footer-logo">INTEGRA</span>
+      <span class="footer-copy">&copy; 2026 INTEGRA. Все права защищены.</span>
+      <a href="#" class="footer-back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Наверх <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
