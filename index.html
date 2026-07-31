@@ -11,6 +11,21 @@
 </head>
 <body>
 
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-logo">INTEGRA</div>
+    <div class="preloader-bar">
+      <div class="preloader-bar-fill"></div>
+    </div>
+    <div class="preloader-counter">0%</div>
+  </div>
+
+  <!-- Noise Texture Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
   <!-- Custom Cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
@@ -19,6 +34,7 @@
   <nav class="nav" id="nav">
     <a href="#hero" class="nav-logo">INTEGRA</a>
     <div class="nav-links">
+      <a href="#about">О нас</a>
       <a href="#portfolio">Работы</a>
       <a href="#services">Услуги</a>
       <a href="#process">Процесс</a>
@@ -29,12 +45,36 @@
   <!-- Section 1: Hero -->
   <section class="section hero" id="hero">
     <div class="hero-bg-layer" id="heroBg"></div>
-    <div class="dot-grid" id="dotGrid"></div>
+    <div class="hero-gradient-orb"></div>
+    <div class="dot-grid" id="dotGrid">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
     <div class="hero-content" id="heroContent">
       <h1 class="hero-title" id="heroTitle">
         <span class="hero-title-line">INTEGRA</span>
       </h1>
       <p class="hero-subtitle" id="heroSubtitle">Создаём сайты, которые работают</p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-primary">
+          Начать проект
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#portfolio" class="btn-secondary">Смотреть работы</a>
+      </div>
     </div>
     <div class="hero-scroll-indicator" id="heroScroll">
       <span>Листайте</span>
@@ -47,7 +87,7 @@
     <div class="about-content">
       <span class="eyebrow">О нас</span>
       <h2 class="section-title about-title">
-        Мы не делаем саймы.<br>
+        Мы не делаем сайты.<br>
         Мы создаём <span class="accent-text">инструменты роста</span>.
       </h2>
       <div class="about-stats">
@@ -65,7 +105,7 @@
         </div>
       </div>
       <p class="about-description">
-        INTEGRA — команда разработчиков и дизайнеров, которая превращает бизнес-задачи в цифровые решения. 
+        INTEGRA — команда разработчиков и дизайнеров, которая превращает бизнес-задачи в цифровые решения.
         Каждый проект — это результат анализа, проектирования и точной реализации.
       </p>
     </div>
@@ -83,10 +123,23 @@
           <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
             <span>E-commerce</span>
           </div>
+          <div class="portfolio-card-overlay">
+            <span>
+              Смотреть проект
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
         </div>
         <div class="portfolio-card-info">
           <h3>ShopFlow</h3>
           <p>Интернет-магазин с кастомной CMS и интеграцией с 1С</p>
+          <div class="portfolio-card-tags">
+            <span class="tag">E-commerce</span>
+            <span class="tag">CMS</span>
+            <span class="tag">1С</span>
+          </div>
         </div>
       </a>
       <a href="#" class="portfolio-card" data-cursor="Смотреть">
@@ -94,10 +147,23 @@
           <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #0f3460, #533483);">
             <span>Corporate</span>
           </div>
+          <div class="portfolio-card-overlay">
+            <span>
+              Смотреть проект
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
         </div>
         <div class="portfolio-card-info">
           <h3>FinTech Group</h3>
           <p>Корпоративный сайт финансовой компании с анимациями</p>
+          <div class="portfolio-card-tags">
+            <span class="tag">Corporate</span>
+            <span class="tag">Finance</span>
+            <span class="tag">Animation</span>
+          </div>
         </div>
       </a>
       <a href="#" class="portfolio-card" data-cursor="Смотреть">
@@ -105,10 +171,23 @@
           <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #1b1b2f, #162447);">
             <span>SaaS</span>
           </div>
+          <div class="portfolio-card-overlay">
+            <span>
+              Смотреть проект
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
         </div>
         <div class="portfolio-card-info">
           <h3>CloudDesk</h3>
           <p>Веб-приложение для управления удалёнными командами</p>
+          <div class="portfolio-card-tags">
+            <span class="tag">SaaS</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">WebSocket</span>
+          </div>
         </div>
       </a>
       <a href="#" class="portfolio-card" data-cursor="Смотреть">
@@ -116,10 +195,23 @@
           <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #0f3460);">
             <span>Landing</span>
           </div>
+          <div class="portfolio-card-overlay">
+            <span>
+              Смотреть проект
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
         </div>
         <div class="portfolio-card-info">
           <h3>АрхСтрой</h3>
           <p>Лендинг для архитектурной студии с 3D-визуализацией</p>
+          <div class="portfolio-card-tags">
+            <span class="tag">Landing</span>
+            <span class="tag">3D</span>
+            <span class="tag">WebGL</span>
+          </div>
         </div>
       </a>
     </div>
@@ -135,26 +227,41 @@
           <span class="service-number">01</span>
           <h3>Разработка сайтов</h3>
           <p>Лендинги, корпоративные сайты, интернет-магазины. От прототипа до запуска.</p>
+          <svg class="service-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <div class="service-item">
           <span class="service-number">02</span>
           <h3>Веб-приложения</h3>
           <p>Кастомные SaaS-решения, CRM, ERP-системы. Полный цикл разработки.</p>
+          <svg class="service-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <div class="service-item">
           <span class="service-number">03</span>
           <h3>UI/UX Дизайн</h3>
           <p>Интерфейсы, которые решают бизнес-задачи. Прототипирование и тестирование.</p>
+          <svg class="service-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <div class="service-item">
           <span class="service-number">04</span>
           <h3>Интеграции</h3>
           <p>Подключение CRM, платёжных систем, аналитики и внешних сервисов.</p>
+          <svg class="service-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <div class="service-item">
           <span class="service-number">05</span>
           <h3>Поддержка</h3>
           <p>Техническое сопровождение, обновления, мониторинг и оптимизация.</p>
+          <svg class="service-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -177,16 +284,13 @@
           </feMerge>
         </filter>
       </defs>
-      <!-- Circuit path -->
       <path class="circuit-path" id="circuitPath"
         d="M 50 100 L 200 100 Q 220 100 220 120 L 220 200 Q 220 220 240 220 L 400 220 Q 420 220 420 240 L 420 350 Q 420 370 440 370 L 600 370 Q 620 370 620 390 L 620 480 Q 620 500 640 500 L 750 500"
         stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"
         filter="url(#glow)"/>
-      <!-- Morphing shape -->
       <g id="morphGroup">
         <rect class="morph-shape" id="morphShape" x="385" y="285" width="30" height="30" rx="4" fill="#0071E3"/>
       </g>
-      <!-- Traveling dot -->
       <circle class="travel-dot" id="travelDot" r="6" fill="#0071E3" filter="url(#glow)"/>
     </svg>
 
@@ -194,6 +298,9 @@
       <span class="eyebrow">Процесс</span>
       <h2 class="section-title">Как мы работаем</h2>
       <div class="process-timeline">
+        <div class="process-timeline-line">
+          <div class="process-timeline-line-fill"></div>
+        </div>
         <div class="process-step">
           <div class="step-number">01</div>
           <div class="step-content">
@@ -248,12 +355,15 @@
       <form class="contact-form" id="contactForm">
         <div class="form-group">
           <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+          <label class="form-group-label" for="name">Имя</label>
         </div>
         <div class="form-group">
           <input type="email" id="email" name="email" placeholder="Email" required>
+          <label class="form-group-label" for="email">Email</label>
         </div>
         <div class="form-group">
           <textarea id="message" name="message" placeholder="Расскажите о проекте" rows="4" required></textarea>
+          <label class="form-group-label" for="message">Сообщение</label>
         </div>
         <button type="submit" class="btn-submit">
           <span>Отправить заявку</span>
@@ -275,6 +385,12 @@
     <div class="footer-content">
       <span class="footer-logo">INTEGRA</span>
       <span class="footer-copy">&copy; 2026 INTEGRA. Все права защищены.</span>
+      <a href="#hero" class="footer-back-to-top">
+        Наверх
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </footer>
 
