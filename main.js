@@ -26,20 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   const preloader = document.querySelector('.preloader');
   const preloaderLogo = document.querySelector('.preloader-logo');
-  const preloaderBarFill = document.querySelector('.preloader-bar-fill');
-  const preloaderCounter = document.querySelector('.preloader-counter');
 
   if (preloader && preloaderLogo) {
-    // Split text into chars
     const text = preloaderLogo.textContent;
     preloaderLogo.innerHTML = text.split('').map(c =>
       `<span class="char">${c}</span>`
     ).join('');
 
     const chars = preloaderLogo.querySelectorAll('.char');
-    let progress = 0;
 
-    // Animate chars in
     gsap.to(chars, {
       opacity: 1,
       y: 0,
@@ -49,32 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
       delay: 0.2
     });
 
-    // Simulate loading
-    const loadInterval = setInterval(() => {
-      progress += Math.random() * 15 + 5;
-      if (progress > 100) progress = 100;
-
-      if (preloaderBarFill) preloaderBarFill.style.width = progress + '%';
-      if (preloaderCounter) preloaderCounter.textContent = Math.round(progress) + '%';
-
-      if (progress >= 100) {
-        clearInterval(loadInterval);
-        setTimeout(() => {
-          gsap.to(preloader, {
-            opacity: 0,
-            duration: 0.6,
-            ease: 'power2.inOut',
-            onComplete: () => {
-              preloader.style.display = 'none';
-              document.body.style.overflow = '';
-              initAnimations();
-            }
-          });
-        }, 400);
+    gsap.to(preloader, {
+      opacity: 0,
+      duration: 0.5,
+      delay: 1.5,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        preloader.style.display = 'none';
+        document.body.style.overflow = '';
+        initAnimations();
       }
-    }, 80);
+    });
 
     document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      if (preloader && preloader.style.display !== 'none') {
+        preloader.style.display = 'none';
+        document.body.style.overflow = '';
+        initAnimations();
+      }
+    }, 4000);
   } else {
     initAnimations();
   }
