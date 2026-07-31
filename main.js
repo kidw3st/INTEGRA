@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ============================================
-  // Dot Grid Animation (anime.js)
+  // Dot Grid Animation (anime.js with GSAP fallback)
   // ============================================
   const dotGrid = document.getElementById('dotGrid');
   if (dotGrid) {
@@ -23,24 +23,59 @@ document.addEventListener('DOMContentLoaded', () => {
       dotGrid.appendChild(dot);
     }
 
-    // Animate dots from center
     const dots = dotGrid.querySelectorAll('.dot');
-    anime({
-      targets: dots,
-      scale: [
-        { value: 1.2, duration: 600, easing: 'inOutQuad' },
-        { value: 0.75, duration: 600, easing: 'inOutQuad' }
-      ],
-      opacity: [
-        { value: 0.7, duration: 400 },
-        { value: 0.35, duration: 400 }
-      ],
-      delay: anime.stagger(30, {
-        grid: [GRID_SIZE, GRID_SIZE],
-        from: 'center'
-      }),
-      loop: false
-    });
+
+    // Try anime.js first, fallback to GSAP
+    try {
+      if (typeof anime !== 'undefined') {
+        anime({
+          targets: dots,
+          scale: [
+            { value: 1.2, duration: 600, easing: 'easeInOutQuad' },
+            { value: 0.75, duration: 600, easing: 'easeInOutQuad' }
+          ],
+          opacity: [
+            { value: 0.7, duration: 400 },
+            { value: 0.35, duration: 400 }
+          ],
+          delay: anime.stagger(30, {
+            grid: [GRID_SIZE, GRID_SIZE],
+            from: 'center'
+          }),
+          loop: false
+        });
+      } else {
+        throw new Error('anime.js not loaded');
+      }
+    } catch (e) {
+      // GSAP fallback: stagger from center using distance calculation
+      const centerRow = Math.floor(GRID_SIZE / 2);
+      const centerCol = Math.floor(GRID_SIZE / 2);
+
+      dots.forEach((dot, i) => {
+        const row = Math.floor(i / GRID_SIZE);
+        const col = i % GRID_SIZE;
+        const distance = Math.sqrt(Math.pow(row - centerRow, 2) + Math.pow(col - centerCol, 2));
+        const delay = distance * 0.03;
+
+        gsap.fromTo(dot,
+          { scale: 0.5, opacity: 0 },
+          {
+            scale: 1.2,
+            opacity: 0.7,
+            duration: 0.6,
+            delay: delay,
+            ease: 'power2.inOut',
+            yoyo: true,
+            repeat: 1,
+            repeatDelay: 0,
+            onRepeat: function() {
+              gsap.to(dot, { scale: 0.75, opacity: 0.35, duration: 0.6, ease: 'power2.inOut' });
+            }
+          }
+        );
+      });
+    }
   }
 
   // ============================================
