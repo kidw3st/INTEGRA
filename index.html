@@ -162,6 +162,33 @@
 
   <!-- Section 5: Process -->
   <section class="section process" id="process">
+    <!-- SVG Circuit Animation -->
+    <svg class="circuit-svg" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0071E3;stop-opacity:0.8"/>
+          <stop offset="100%" style="stop-color:#0071E3;stop-opacity:0.2"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <!-- Circuit path -->
+      <path class="circuit-path" id="circuitPath"
+        d="M 50 100 L 200 100 Q 220 100 220 120 L 220 200 Q 220 220 240 220 L 400 220 Q 420 220 420 240 L 420 350 Q 420 370 440 370 L 600 370 Q 620 370 620 390 L 620 480 Q 620 500 640 500 L 750 500"
+        stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"
+        filter="url(#glow)" opacity="0"/>
+      <!-- Morphing shape (circle → rounded rect → hexagon) -->
+      <path class="morph-shape" id="morphShape" fill="#0071E3" opacity="0"
+        d="M 400 300 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0"/>
+      <!-- Traveling dot -->
+      <circle class="travel-dot" id="travelDot" r="6" fill="#0071E3" opacity="0" filter="url(#glow)"/>
+    </svg>
+
     <div class="process-content">
       <span class="eyebrow">Процесс</span>
       <h2 class="section-title">Как мы работаем</h2>
@@ -250,9 +277,10 @@
     </div>
   </footer>
 
-  <!-- GSAP + ScrollTrigger -->
+  <!-- GSAP + ScrollTrigger + MotionPath -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

@@ -428,6 +428,91 @@ document.addEventListener('DOMContentLoaded', () => {
     }, '-=0.3');
   });
 
+  // ============================================
+  // Circuit SVG Animation (draw + motion path + morph)
+  // ============================================
+  gsap.registerPlugin(MotionPathPlugin);
+
+  const circuitPath = document.getElementById('circuitPath');
+  const travelDot = document.getElementById('travelDot');
+  const morphShape = document.getElementById('morphShape');
+
+  if (circuitPath && travelDot && morphShape) {
+    const pathLength = circuitPath.getTotalLength();
+
+    // Set initial stroke-dasharray for draw effect
+    circuitPath.style.strokeDasharray = pathLength;
+    circuitPath.style.strokeDashoffset = pathLength;
+
+    const circuitTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#process',
+        start: 'top 60%',
+        end: 'bottom 40%',
+        scrub: 1
+      }
+    });
+
+    // 1. Draw the circuit path (like createDrawable '0 1')
+    circuitTl.to(circuitPath, {
+      strokeDashoffset: 0,
+      opacity: 1,
+      duration: 3,
+      ease: 'none'
+    });
+
+    // 2. Travel dot along the path (like createMotionPath)
+    circuitTl.to(travelDot, {
+      opacity: 1,
+      duration: 0.3
+    }, 0.3);
+
+    circuitTl.to(travelDot, {
+      motionPath: {
+        path: '#circuitPath',
+        align: '#circuitPath',
+        autoRotate: true,
+        alignOrigin: [0.5, 0.5]
+      },
+      duration: 2.5,
+      ease: 'none'
+    }, 0.3);
+
+    // 3. Morphing shape (circle → rounded rect → hexagon)
+    // Circle
+    const circlePath = 'M 400 300 m -20 0 a 20 20 0 1 0 40 0 a 20 20 0 1 0 -40 0';
+    // Rounded rectangle
+    const rectPath = 'M 380 285 Q 380 275 390 275 L 410 275 Q 420 275 420 285 L 420 315 Q 420 325 410 325 L 390 325 Q 380 325 380 315 Z';
+    // Hexagon
+    const hexPath = 'M 400 275 L 420 287 L 420 313 L 400 325 L 380 313 L 380 287 Z';
+
+    circuitTl.to(morphShape, {
+      opacity: 0.8,
+      duration: 0.5
+    }, 0.5);
+
+    // Circle → Rect
+    circuitTl.to(morphShape, {
+      attr: { d: rectPath },
+      duration: 0.8,
+      ease: 'power2.inOut'
+    }, 1);
+
+    // Rect → Hex
+    circuitTl.to(morphShape, {
+      attr: { d: hexPath },
+      duration: 0.8,
+      ease: 'power2.inOut'
+    }, 1.8);
+
+    // Hex → back to Circle
+    circuitTl.to(morphShape, {
+      attr: { d: circlePath },
+      duration: 0.8,
+      ease: 'power2.inOut'
+    }, 2.6);
+  }
+
   // Timeline line animation
   gsap.from('.process-timeline::before', {
     scaleY: 0,

@@ -563,6 +563,26 @@ img {
 .process {
   background: var(--n-0);
   padding: var(--space-6xl) var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 900px;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.circuit-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
 }
 
 .process-content {
